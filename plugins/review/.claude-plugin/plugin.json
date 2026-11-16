@@ -1,6 +1,6 @@
 {
   "name": "review",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "/whoami shows this session's ID; /second-opinion ID asks that session for the 3 biggest risks in Claude's last answer, and the review comes back here",
   "license": "MIT",
   "author": { "name": "alonhasfri" }

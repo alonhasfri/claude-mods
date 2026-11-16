@@ -61,6 +61,8 @@ function request(from: string, question: string, answer: string): string {
   const cut = answer.length > MAX_ANSWER ? `${answer.slice(0, MAX_ANSWER)}\n[... cut ...]` : answer
 
   return [
+    `[Sent automatically by the second-opinion mod from session ${from}, after the person typed /second-opinion there. Not typed in this chat.]`,
+    '',
     `Another Claude session of mine (${from}) asks you for a review.`,
     'Read the question and the answer below and name the 3 biggest risks in the answer: what could be wrong,',
     'break, be unsafe or be missing. Most serious first, each in 2-3 sentences, with what to do about it.',
@@ -96,6 +98,31 @@ async function deliver($: EngineInterface, to: string, text: string): Promise<st
   return sent.isDelivered ? '' : sent.reason
 }
 
+const REVIEWER_KEY = 'reviewer'
+
+// '' when the reviewer chat is there to answer, else why not ("was archived").
+// Where there is no cloud connector to ask, it is assumed to be there.
+async function reviewerGone($: EngineInterface, to: string): Promise<string> {
+  if (!to.startsWith('session_')) {
+    return ''
+  }
+
+  try {
+    const result = await $.mcp.call(REMOTE, 'get_session', { session_id: to })
+    const text = firstText(result)
+
+    if (result.isError) {
+      return /not.?found|no such|unknown|404/i.test(text) ? 'no longer exists' : ''
+    }
+
+    return /ARCHIVED|DELETED|EXPIRED/i.test(/"session_status"\s*:\s*"([^"]+)"/.exec(text)?.[1] ?? '')
+      ? 'was closed (archived)'
+      : ''
+  } catch {
+    return ''
+  }
+}
+
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     await $.command.register({ name: 'whoami', description: "Show this session's ID for /second-opinion" })
@@ -113,14 +140,20 @@ export const register: Register = on => {
   }))
 
   on('command.run', { command: 'second-opinion' }, async ($, e) => {
+    const arg = e.args.trim()
+
+    if (arg.toLowerCase() === 'reset') {
+      await $.store.delete(REVIEWER_KEY)
+
+      return { text: 'Forgot the remembered reviewer chat. Next time, give an ID: /second-opinion <session ID>.' }
+    }
     // With no ID, the reviewer you used last time.
-    const saved = await $.store.get('reviewer')
-    const to = e.args.trim() || (typeof saved === 'string' ? saved : '')
+    const saved = await $.store.get(REVIEWER_KEY)
+    const to = arg || (typeof saved === 'string' ? saved : '')
 
     if (!ID.test(to)) {
       return { text: 'Usage: /second-opinion <session ID>. Get the ID with /whoami in the session that should do the review. After the first time, /second-opinion alone reuses it.' }
     }
-    await $.store.set('reviewer', to)
     const me = await myId($)
 
     if (to === me) {
@@ -131,12 +164,25 @@ export const register: Register = on => {
     if (answer === '') {
       return { text: 'There is no answer from Claude to review yet.' }
     }
+    const gone = await reviewerGone($, to)
+
+    if (gone !== '') {
+      if (arg === '') {
+        await $.store.delete(REVIEWER_KEY)
+      }
+
+      return { text: `The reviewer chat ${to} ${gone}. Open a new chat, type /whoami there, then here type /second-opinion with the new ID.` }
+    }
     const problem = await deliver($, to, request(me, question, answer))
 
+    if (problem !== '') {
+      return { text: `Could not send it to ${to}: ${problem}` }
+    }
+    await $.store.set(REVIEWER_KEY, to)
+
     return {
-      text: problem === ''
-        ? `Sent Claude's last answer to ${to} for review. The 3 biggest risks will arrive here as a message when that session is done.`
-        : `Could not send it to ${to}: ${problem}`,
+      text: `Sent Claude's last answer to ${to} for review. The 3 biggest risks will arrive here as a message when that session is done.\n` +
+        `That chat is remembered, so next time /second-opinion alone is enough (/second-opinion reset forgets it).`,
     }
   })
 }
