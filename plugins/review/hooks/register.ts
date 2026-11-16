@@ -3,7 +3,7 @@ import type { EngineInterface, Register, SessionMessage } from 'claude-code'
 // review: a second opinion from another Claude session.
 //
 //   /whoami        this session's ID, to paste into another session
-//   /review ID     sends Claude's last answer (and the question it answered) to
+//   /second-opinion ID   sends Claude's last answer (and the question it answered) to
 //                  session ID, asking for the 3 biggest risks. That session
 //                  sends its review back, and it arrives here as a message.
 //
@@ -98,9 +98,9 @@ async function deliver($: EngineInterface, to: string, text: string): Promise<st
 
 export const register: Register = on => {
   on('session.start', async ($, e, next) => {
-    await $.command.register({ name: 'whoami', description: "Show this session's ID for /review" })
+    await $.command.register({ name: 'whoami', description: "Show this session's ID for /second-opinion" })
     await $.command.register({
-      name: 'review',
+      name: 'second-opinion',
       description: "Ask another session for the 3 biggest risks in Claude's last answer",
       argumentHint: '<session ID>',
     })
@@ -109,14 +109,14 @@ export const register: Register = on => {
   })
 
   on('command.run', { command: 'whoami' }, async $ => ({
-    text: `This session's ID: ${await myId($)}\nIn another session, type /review followed by this ID to have this session review that one's answers.`,
+    text: `This session's ID: ${await myId($)}\nIn another session, type /second-opinion followed by this ID to have this session review that one's answers.`,
   }))
 
-  on('command.run', { command: 'review' }, async ($, e) => {
+  on('command.run', { command: 'second-opinion' }, async ($, e) => {
     const to = e.args.trim()
 
     if (!ID.test(to)) {
-      return { text: 'Usage: /review <session ID>. Get the ID with /whoami in the session that should do the review.' }
+      return { text: 'Usage: /second-opinion <session ID>. Get the ID with /whoami in the session that should do the review.' }
     }
     const me = await myId($)
 
