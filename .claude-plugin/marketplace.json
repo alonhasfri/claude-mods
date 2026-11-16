@@ -37,7 +37,7 @@
     {
       "name": "quick",
       "source": "./plugins/quick",
-      "description": "Runs messages starting with quick: and Explore subagents on Haiku, and shows today's Haiku count"
+      "description": "Easy messages run on Haiku, hard ones on your usual model; quick: and full: force one; Explore subagents on Haiku"
     }
   ],
   "description": "Claude Code mods for building alonhasfri's apps"
