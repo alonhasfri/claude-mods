@@ -38,6 +38,11 @@
       "name": "quick",
       "source": "./plugins/quick",
       "description": "Easy messages run on Haiku, hard ones on your usual model; quick: and full: force one; Explore subagents on Haiku"
+    },
+    {
+      "name": "review",
+      "source": "./plugins/review",
+      "description": "/whoami shows this session's ID; /review ID asks that session for the 3 biggest risks in Claude's last answer, and the review comes back here"
     }
   ],
   "description": "Claude Code mods for building alonhasfri's apps"

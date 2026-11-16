@@ -1,0 +1,7 @@
+{
+  "name": "review",
+  "version": "0.1.0",
+  "description": "/whoami shows this session's ID; /review ID asks that session for the 3 biggest risks in Claude's last answer, and the review comes back here",
+  "license": "MIT",
+  "author": { "name": "alonhasfri" }
+}
