@@ -1,0 +1,7 @@
+{
+  "name": "smooth-stream",
+  "version": "0.2.0",
+  "description": "Shows Claude's reply a paragraph at a time (or in bursts, or all at once) so the screen stops jumping while you read",
+  "license": "MIT",
+  "author": { "name": "alonhasfri" }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "zip-guard",
+  "version": "0.1.0",
+  "description": "Stops a commit or push in combo-checker when combo-android/ edits are not in combo-android.zip",
+  "license": "MIT",
+  "author": { "name": "alonhasfri" }
+}

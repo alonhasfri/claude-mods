@@ -1,0 +1,7 @@
+{
+  "name": "edition-guard",
+  "version": "0.1.0",
+  "description": "Keeps combo-checker's prank code in the full edition and the safe edition's stand-ins in step",
+  "license": "MIT",
+  "author": { "name": "alonhasfri" }
+}
