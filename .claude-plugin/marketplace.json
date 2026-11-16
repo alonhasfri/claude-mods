@@ -1,0 +1,39 @@
+{
+  "name": "alon-mods",
+  "owner": {
+    "name": "alonhasfri"
+  },
+  "plugins": [
+    {
+      "name": "done-ping",
+      "source": "./plugins/done-ping",
+      "description": "Notifies you when Claude finishes a long task, stops on an error, or needs your answer"
+    },
+    {
+      "name": "comboed-theme",
+      "source": "./plugins/comboed-theme",
+      "description": "Comboed's colors for the Claude app, switched with /comboed-theme"
+    },
+    {
+      "name": "build-pane",
+      "source": "./plugins/build-pane",
+      "description": "A pane with your apps' GitHub Actions builds, and a notification when a new APK is ready"
+    },
+    {
+      "name": "zip-guard",
+      "source": "./plugins/zip-guard",
+      "description": "Stops a commit or push in combo-checker when combo-android/ edits are not in combo-android.zip"
+    },
+    {
+      "name": "edition-guard",
+      "source": "./plugins/edition-guard",
+      "description": "Keeps combo-checker's prank code in the full edition and the safe edition's stand-ins in step"
+    },
+    {
+      "name": "smooth-stream",
+      "source": "./plugins/smooth-stream",
+      "description": "Shows Claude's reply a paragraph at a time so the screen stops jumping while you read"
+    }
+  ],
+  "description": "Claude Code mods for building alonhasfri's apps"
+}

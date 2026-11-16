@@ -1,0 +1,9 @@
+{
+  "name": "done-ping",
+  "version": "0.9.0",
+  "description": "Notifies you on your phone when Claude finishes a reply, stops on an error, or needs your answer",
+  "license": "MIT",
+  "author": {
+    "name": "alonhasfri"
+  }
+}

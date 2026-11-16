@@ -1,0 +1,8 @@
+{
+  "name": "build-pane",
+  "version": "0.1.0",
+  "description": "A pane with your apps' GitHub Actions builds, and a notification when a new APK is ready",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": { "name": "alonhasfri" }
+}
