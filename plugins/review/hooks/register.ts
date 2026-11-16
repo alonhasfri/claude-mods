@@ -102,7 +102,7 @@ export const register: Register = on => {
     await $.command.register({
       name: 'second-opinion',
       description: "Ask another session for the 3 biggest risks in Claude's last answer",
-      argumentHint: '<session ID>',
+      argumentHint: '[session ID]',
     })
 
     return next(e)
@@ -113,11 +113,14 @@ export const register: Register = on => {
   }))
 
   on('command.run', { command: 'second-opinion' }, async ($, e) => {
-    const to = e.args.trim()
+    // With no ID, the reviewer you used last time.
+    const saved = await $.store.get('reviewer')
+    const to = e.args.trim() || (typeof saved === 'string' ? saved : '')
 
     if (!ID.test(to)) {
-      return { text: 'Usage: /second-opinion <session ID>. Get the ID with /whoami in the session that should do the review.' }
+      return { text: 'Usage: /second-opinion <session ID>. Get the ID with /whoami in the session that should do the review. After the first time, /second-opinion alone reuses it.' }
     }
+    await $.store.set('reviewer', to)
     const me = await myId($)
 
     if (to === me) {
