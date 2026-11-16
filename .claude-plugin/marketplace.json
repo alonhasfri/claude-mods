@@ -33,6 +33,11 @@
       "name": "smooth-stream",
       "source": "./plugins/smooth-stream",
       "description": "Shows Claude's reply a paragraph at a time so the screen stops jumping while you read"
+    },
+    {
+      "name": "quick",
+      "source": "./plugins/quick",
+      "description": "Runs messages starting with quick: and Explore subagents on Haiku, and shows today's Haiku count"
     }
   ],
   "description": "Claude Code mods for building alonhasfri's apps"

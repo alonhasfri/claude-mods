@@ -1,0 +1,7 @@
+{
+  "name": "quick",
+  "version": "0.1.0",
+  "description": "Runs messages starting with quick: and Explore subagents on Haiku, and shows today's Haiku count",
+  "license": "MIT",
+  "author": { "name": "alonhasfri" }
+}
