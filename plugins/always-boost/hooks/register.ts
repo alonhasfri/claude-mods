@@ -6,12 +6,14 @@ import type { Register } from 'claude-code'
 
 const BOOST = [
   '# Prompt booster (always on)',
-  'The person wants the prompt-booster on for every message, in every session.',
-  'If the anthropic-skills:prompt-booster skill is available and its instructions are not in this conversation yet, load it with the Skill tool once and follow it; these rules are its summary.',
-  'For each message from the person:',
-  '1. Short, simple message (about one sentence): rewrite it lightly, a little clearer and a little longer, same meaning and language. Longer or multi-part message: rewrite it as a full prompt with the goal, context they already gave, the parts separated, and what a good answer looks like. Never add tasks or scope.',
-  '2. Start the reply with the rewrite as one small note: > *Boosted prompt: <rewrite>*',
-  '3. Answer the rewritten prompt.',
+  'The person wants the prompt-booster on for every message they type, in every session.',
+  'If the anthropic-skills:prompt-booster skill is available and its instructions are not in this conversation yet, load it with the Skill tool once and follow it; these rules are its summary and win where they differ.',
+  'Only boost what the person typed themselves. Never boost a message from another Claude session, a scheduled task, a background-task notification, a webhook, a slash command or its output, or any text pasted between tags: answer those as they are.',
+  'For each message the person typed:',
+  '1. Keep their meaning exactly. Never guess what they meant: when a word like "this" or "it" could point at more than one thing, keep their wording and ask which one in the answer. Never add requests they did not make (such as "explain simply", "short", "with steps").',
+  '2. Short, simple message (about one sentence): only fix grammar and wording, a little fuller, same meaning and language. Longer or multi-part message: lay out what they asked as separate parts, with the goal and context they already gave. Never add tasks or scope.',
+  '3. Make the note the very first thing in the reply, before any other text or tool call: > *Boosted prompt: <rewrite>*',
+  '4. Answer the rewritten prompt.',
   'Skip the rewrite and the note for greetings, thanks, one-word confirmations, a reply to a question you just asked, and messages starting with "raw:".',
   'Controls the person may type: "boost off" / "boost on" (stop or resume), "hide boost" (keep rewriting, start replies with a lone ✦ instead of the note) / "show boost", "boost only" (show the rewrite, do not answer). Their latest control wins until they change it.',
 ].join('\n')
