@@ -57,7 +57,7 @@ async function apply($: EngineInterface, isOn: boolean): Promise<string> {
 
   return set.isDrawn
     ? 'Comboed theme on.'
-    : `Comboed theme on, but nothing here draws themes (${set.reason}). It shows in the desktop and mobile apps.`
+    : `Comboed theme on and saved, but the app you're using doesn't draw mod themes, so nothing changes here (${set.reason}). It shows only in an app that draws themes, such as the Claude desktop app.`
 }
 
 export const register: Register = on => {

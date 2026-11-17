@@ -1,9 +1,1 @@
-{
-  "name": "comboed-theme",
-  "version": "0.1.0",
-  "description": "Comboed's colors for the Claude app, switched with /comboed-theme",
-  "license": "MIT",
-  "author": {
-    "name": "alonhasfri"
-  }
-}
+{ "name": "comboed-theme", "version": "0.1.1", "description": "Comboed's colors for the Claude app, switched with /comboed-theme" }
