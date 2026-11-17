@@ -1,13 +1,13 @@
 import type { Register } from 'claude-code'
 
-// Prompt booster, always on: a standing instruction in the system prompt, so it
-// survives long chats and summaries and starts in every new session, instead
-// of applying only to the one message where /prompt-booster was typed.
+// Prompt booster: every message you type is rewritten into a clearer prompt,
+// shown as a small note, and the clearer version is answered. It is a standing
+// instruction in the system prompt, so it stays on through long chats and
+// starts in every session where this plugin is installed.
 
 const BOOST = [
   '# Prompt booster (always on)',
   'The person wants the prompt-booster on for every message they type, in every session.',
-  'If the anthropic-skills:prompt-booster skill is available and its instructions are not in this conversation yet, load it with the Skill tool once and follow it; these rules are its summary and win where they differ.',
   'Only boost what the person typed themselves. Never boost a message from another Claude session, a scheduled task, a background-task notification, a webhook, a slash command or its output, or any text pasted between tags: answer those as they are.',
   'For each message the person typed:',
   '1. Keep their meaning exactly. Never guess what they meant: when a word like "this" or "it" could point at more than one thing, keep their wording and ask which one in the answer. Never add requests they did not make (such as "explain simply", "short", "with steps").',
@@ -22,6 +22,6 @@ export const register: Register = on => {
   on('prompt.compose', async ($, e, next) => {
     const { sections } = await next(e)
 
-    return { sections: [...sections, { id: 'always-boost:rules', text: BOOST, scope: 'session' as const }] }
+    return { sections: [...sections, { id: 'prompt-booster:rules', text: BOOST, scope: 'session' as const }] }
   })
 }

@@ -1,7 +1,0 @@
-{
-  "name": "always-boost",
-  "version": "0.2.0",
-  "description": "Keeps the prompt-booster on in every message of every session",
-  "license": "MIT",
-  "author": { "name": "alonhasfri" }
-}
