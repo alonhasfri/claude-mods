@@ -9,7 +9,7 @@ import { makeColors } from './make-colors.js'
 //     only in apps that draw mod themes, such as the Claude desktop app.
 //
 //   /butler                 status
-//   /butler on | off        the personality
+//   /butler on | off        the personality (off by default in every chat)
 //   /butler look on | off   the HUD look (turn /comboed-theme off first)
 //   /butler name Jarvis     what he calls himself
 //   /butler call me boss    what he calls you (default "sir")
@@ -76,7 +76,8 @@ const SCENE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" p
 
 type Settings = { isOn: boolean; hasLook: boolean; name: string; title: string }
 
-const DEFAULTS: Settings = { isOn: true, hasLook: false, name: 'Atlas', title: 'sir' }
+// Off in every chat until you type /butler on (in that chat).
+const DEFAULTS: Settings = { isOn: false, hasLook: false, name: 'Atlas', title: 'sir' }
 
 async function load($: EngineInterface): Promise<Settings> {
   const saved = (await $.store.get('settings')) as Partial<Settings> | undefined
