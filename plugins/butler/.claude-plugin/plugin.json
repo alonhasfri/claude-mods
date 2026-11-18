@@ -1,6 +1,6 @@
 {
   "name": "butler",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Turns Claude into a calm, witty AI butler with a suit-HUD look; name him yourself with /butler name",
   "license": "MIT",
   "author": { "name": "alonhasfri" }
