@@ -10,7 +10,7 @@ import type { EngineInterface, Register } from 'claude-code'
 //   - Explore subagents always run on Haiku.
 //   - Haiku is read-only: if a Haiku turn tries to edit a file or run a command
 //     that changes something, the rest of that turn is handed to your usual model.
-//   - In a long chat (over 40k tokens) Haiku is skipped: re-reading the whole
+//   - In a long chat (over 100k tokens) Haiku is skipped: re-reading the whole
 //     chat without the cache would cost more than your usual model.
 //   - Under each Haiku answer: "⚡ Haiku · N today". The status line shows the
 //     day's runs and tokens for this chat.
@@ -22,8 +22,10 @@ const HAIKU = 'haiku'
 const QUICK = /^\s*quick:\s*/i
 const FULL = /^\s*full:\s*/i
 const TIME_ZONE = 'Asia/Jerusalem'
-// Above this many tokens in the chat, Haiku costs more than it saves.
-const MAX_CONTEXT_TOKENS = 40_000
+// Above this many tokens in the chat, Haiku costs more than it saves. A new
+// chat already holds 30-50k tokens of built-in instructions and tools, so the
+// limit sits well above that.
+const MAX_CONTEXT_TOKENS = 100_000
 // Messages longer than this are treated as hard without asking.
 const LONG_MESSAGE = 600
 // Commands a Haiku turn may run; anything else hands the turn over.
