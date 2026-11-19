@@ -1,0 +1,7 @@
+{
+  "name": "my-mods",
+  "version": "0.1.0",
+  "description": "Tells Claude which of your mods are installed and what their commands are, so any chat can answer questions about them",
+  "license": "MIT",
+  "author": { "name": "alonhasfri" }
+}

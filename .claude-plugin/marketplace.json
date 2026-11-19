@@ -53,6 +53,11 @@
       "name": "butler",
       "source": "./plugins/butler",
       "description": "Turns Claude into a calm, witty AI butler with a suit-HUD look; name him yourself with /butler name"
+    },
+    {
+      "name": "my-mods",
+      "source": "./plugins/my-mods",
+      "description": "Tells Claude which of your mods are installed and what their commands are"
     }
   ],
   "description": "Claude Code mods for building alonhasfri's apps"
