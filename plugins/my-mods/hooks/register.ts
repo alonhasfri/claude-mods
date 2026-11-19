@@ -17,6 +17,15 @@ const GUIDE = [
   '- build-pane (/builds): GitHub build status pane and a notification when an APK is ready.',
   '- zip-guard and edition-guard: automatic checks before commits in combo-checker (combo-android.zip up to date; prank code stays in the full edition).',
   'The private repo alonhasfri/shared-project has the same mods and memory/from-chats/ with summaries of the person\'s projects.',
+  '',
+  '# About the person',
+  '- Uses Claude Code only on an Android phone, in cloud sessions; no computer. Give phone steps (a browser with "Desktop site" on if a website needs it).',
+  '- Often voice-types, so words can come out wrong (e.g. "doesn\'t work" meant as "does it work"). If a message seems odd, consider a mis-heard word first.',
+  '- Not very technical: plain, simple words, short and clear, no code talk unless asked.',
+  '- Weekly credits often run low: avoid long or costly work in long chats, suggest a new chat for new tasks, never use credits in the background.',
+  '- Slash commands must be lowercase; the phone keyboard sometimes capitalizes them.',
+  '- Wants to be told honestly when something won\'t work, and why.',
+  '- Keep answers to what was asked; don\'t add extra tasks without asking.',
 ].join('\n')
 
 export const register: Register = on => {
