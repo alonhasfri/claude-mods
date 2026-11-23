@@ -19,31 +19,40 @@ they keep working in every session after.
 
 ## Install
 
-At the prompt of a Claude Code terminal session:
+**On a computer, in a Claude Code terminal session**, add the marketplace once:
 
 ```
-/plugin install done-ping --marketplace alonhasfri/empty-repo-1
-/plugin install comboed-theme --marketplace alonhasfri/empty-repo-1
+/plugin marketplace add alonhasfri/claude-mods
 ```
 
-Answer `y` to add the marketplace, then press Enter to pick the user scope.
-
-From a shell:
+Then install the mods you want, one line each (any name from the table above):
 
 ```
-claude plugin install done-ping --marketplace alonhasfri/empty-repo-1
-claude plugin install comboed-theme --marketplace alonhasfri/empty-repo-1
+/plugin install done-ping@alon-mods
+/plugin install comboed-theme@alon-mods
+/plugin install quick@alon-mods
 ```
 
-In the desktop app: click **+** next to the prompt box, then **Plugins**, **Add marketplace** with
-`alonhasfri/empty-repo-1`, then **Add plugin**.
+From a shell, the same with `claude plugin marketplace add alonhasfri/claude-mods` and
+`claude plugin install <mod>@alon-mods`.
+
+**In the desktop app** (local chats on your computer): click **+** next to the prompt box, then
+**Plugins**, **Add marketplace** with `alonhasfri/claude-mods`, then **Add plugin** for each mod.
+
+**In a cloud chat that doesn't have them** (another environment, or started before the setup script),
+paste this to Claude:
+
+> Install my Claude Code mods in this session: run `git clone --depth 1 https://github.com/alonhasfri/claude-mods ~/.claude/alon-mods`, then `claude plugin marketplace add ~/.claude/alon-mods`, then `claude plugin install <name>@alon-mods --scope user` for every folder in ~/.claude/alon-mods/plugins/. Then tell me which ones loaded.
+
+Start a new chat after installing on a computer. Mods load when a chat starts.
 
 This repository is public, so installing needs no GitHub login.
 
 ## Cloud sessions
 
 `/plugin` doesn't run in the Claude mobile app. The cloud environment's setup script clones this
-repository and installs every mod, so each new cloud session starts with them. done-ping reads
+repository and installs every mod, so each new cloud session on that environment (Default) starts with
+them. Chats on another environment, or on your computer, need the install steps above. done-ping reads
 `DONE_PING_EMAIL` and `DONE_PING_VIA` from the environment as its defaults.
 
 ## Layout
